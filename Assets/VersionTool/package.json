@@ -3,5 +3,14 @@
   "displayName": "Version Tool",
   "version": "0.0.1",
   "unity": "2018.3",
-  "description": "An editor tool which lets developers administer the version numbers of Unity projects."
+  "description": "An editor tool which lets developers administer the version numbers of Unity projects.",
+  "keywords": [
+    "version",
+    "versioning",
+    "SemVer"
+  ],
+  "author": {
+    "name": "Computer Science 5, RWTH Aachen",
+    "url": "http://dbis.rwth-aachen.de/cms"
+  }
 }

@@ -59,3 +59,4 @@ sysinfo.txt
 crashlytics-build.properties
 
 /App
+/Assets/VersionTool/package-lock.json
