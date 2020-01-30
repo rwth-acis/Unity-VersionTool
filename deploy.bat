@@ -1,1 +1,1 @@
-git subtree push --prefix Assets/VersionWindow origin upm
+git subtree push --prefix Assets/VersionTool origin upm
