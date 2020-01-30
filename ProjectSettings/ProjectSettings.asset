@@ -118,7 +118,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 2.2.2rc0
+  bundleVersion: 0.1.0a1
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -157,8 +157,8 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   applicationIdentifier: {}
   buildNumber:
-    iOS: 2.2.2rc0
-  AndroidBundleVersionCode: 20202
+    iOS: 0.1.0a1
+  AndroidBundleVersionCode: 100
   AndroidMinSdkVersion: 16
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
@@ -545,7 +545,7 @@ PlayerSettings:
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
   metroPackageName: Template3D
-  metroPackageVersion: 2.2.2.0
+  metroPackageVersion: 0.1.0.1
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 

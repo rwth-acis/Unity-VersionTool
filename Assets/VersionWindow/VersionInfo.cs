@@ -159,7 +159,7 @@ namespace i5.Editor.Versioning
         /// </summary>
         /// <returns>The saved version configuration or the default version 0.1.0a0 if the configuration file does not exist</returns>
         public static VersionInfo TryLoad()
-        {
+        {   
             if (File.Exists(infoPath))
             {
                 string json = File.ReadAllText(infoPath);
