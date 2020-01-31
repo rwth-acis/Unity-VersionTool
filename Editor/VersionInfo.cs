@@ -21,7 +21,7 @@ namespace i5.Editor.Versioning
         [SerializeField]
         private int buildVersion;
 
-        private const string infoPath = "Assets/versionInfo.txt";
+        private const string infoPath = "Assets/versionConfig.json";
 
         public int MajorVersion { get => majorVersion; }
 
