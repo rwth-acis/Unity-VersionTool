@@ -152,6 +152,7 @@ namespace i5.Editor.Versioning
         {
             string json = JsonUtility.ToJson(this);
             File.WriteAllText(infoPath, json);
+            AssetDatabase.Refresh();
         }
 
         /// <summary>
