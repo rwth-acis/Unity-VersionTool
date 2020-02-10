@@ -1,11 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 
 namespace i5.Editor.Versioning
 {
-    public class VersionWindow : EditorWindow
+    public class VersionWindow
+#if UNITY_EDITOR
+        : EditorWindow
+#endif
     {
         private static int major = 1;
         private static int minor = 0;
@@ -14,6 +17,7 @@ namespace i5.Editor.Versioning
 
         public static VersionInfo VersionInfo { get; set; }
 
+#if UNITY_EDITOR
         [MenuItem("Window/Version Settings")]
         public static void ShowWindow()
         {
@@ -77,6 +81,7 @@ namespace i5.Editor.Versioning
             patch = VersionInfo.PatchVersion;
             selectedStage = VersionInfo.Stage;
         }
+#endif
     }
 
     public enum VersionStage
