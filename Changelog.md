@@ -3,7 +3,7 @@
 This file keeps track of the changes between releases of the Unity-VersionTool.
 
 ## [0.1.1] - 2020-02-10
-Supporting for project builds
+Support for project builds
 
 ### Fixes
 - fixed "namespace not found"-errors for UnityEditor namespaces when building the project
