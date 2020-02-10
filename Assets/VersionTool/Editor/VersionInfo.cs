@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 
 namespace i5.Editor.Versioning
@@ -93,10 +93,12 @@ namespace i5.Editor.Versioning
 
         private void ApplyVersion()
         {
+#if UNITY_EDITOR
             PlayerSettings.bundleVersion = VersionString;
             PlayerSettings.WSA.packageVersion = new Version(MajorVersion, MinorVersion, PatchVersion, BuildVersion);
             PlayerSettings.Android.bundleVersionCode = VersionNumeric;
             PlayerSettings.iOS.buildNumber = VersionString;
+#endif
         }
 
         /// <summary>
@@ -150,9 +152,11 @@ namespace i5.Editor.Versioning
         /// </summary>
         public void Save()
         {
+#if UNITY_EDITOR
             string json = JsonUtility.ToJson(this);
             File.WriteAllText(infoPath, json);
             AssetDatabase.Refresh();
+#endif
         }
 
         /// <summary>
