@@ -21,7 +21,7 @@ namespace i5.Editor.Versioning
         [SerializeField]
         private int buildVersion;
 
-        private const string infoPath = "Assets/versionConfig.json";
+        public const string infoPath = "Assets/versionConfig.json";
 
         public int MajorVersion { get => majorVersion; }
 
@@ -77,16 +77,16 @@ namespace i5.Editor.Versioning
 
         public VersionInfo(int major, int minor, int patch, VersionStage stage, int build)
         {
-            SetVersion(major, minor, patch, stage);
+            SetVersion(major, minor, patch, stage, build);
         }
 
-        public void SetVersion(int major, int minor, int patch, VersionStage stage)
+        public void SetVersion(int major, int minor, int patch, VersionStage stage, int build = 0)
         {
             majorVersion = major;
             minorVersion = minor;
             patchVersion = patch;
             Stage = stage;
-            buildVersion = 0;
+            buildVersion = build;
 
             ApplyVersion();
         }
