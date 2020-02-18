@@ -7,6 +7,9 @@ using UnityEngine;
 
 namespace i5.Editor.Versioning
 {
+    /// <summary>
+    /// Object which administers and applies version data for the project
+    /// </summary>
     [Serializable]
     public class VersionInfo
     {
@@ -21,18 +24,39 @@ namespace i5.Editor.Versioning
         [SerializeField]
         private int buildVersion;
 
+        /// <summary>
+        /// The save path of the serialized information
+        /// </summary>
         public const string infoPath = "Assets/versionConfig.json";
 
+        /// <summary>
+        /// The major version number which is increased if major breaking changes are made
+        /// </summary>
         public int MajorVersion { get => majorVersion; }
 
+        /// <summary>
+        /// The minor version number which is increased if minor breaking changes are made
+        /// </summary>
         public int MinorVersion { get => minorVersion; }
 
+        /// <summary>
+        /// The patch version number which is increased if small backwards compatible changes are made
+        /// </summary>
         public int PatchVersion { get => patchVersion; }
 
+        /// <summary>
+        /// The stage of the software
+        /// </summary>
         public VersionStage Stage { get => (VersionStage)stage; private set => stage = (int)value; }
 
+        /// <summary>
+        /// The build version which is increased if the application is built
+        /// </summary>
         public int BuildVersion { get => buildVersion; }
 
+        /// <summary>
+        /// Gets a version string of the format [major].[minor].[patch][stageLetter][build]
+        /// </summary>
         public string VersionString
         {
             get
@@ -41,6 +65,9 @@ namespace i5.Editor.Versioning
             }
         }
 
+        /// <summary>
+        /// Gets a numeric representation of the version by concatenating the numbers of major, minor and patch versions
+        /// </summary>
         public int VersionNumeric
         {
             get
@@ -50,11 +77,31 @@ namespace i5.Editor.Versioning
             }
         }
 
+        /// <summary>
+        /// Gets a short representation of the version string of the format [major].[minor].[patch]
+        /// If the patch version is 0, it is ommited
+        /// </summary>
+        public string ShortVersionString
+        {
+            get
+            {
+                string versionString = MajorVersion + "." + MinorVersion;
+                if (PatchVersion != 0)
+                {
+                    versionString += "." + PatchVersion;
+                }
+                return versionString;
+            }
+        }
+
+        /// <summary>
+        /// Gets an abbreviation for the stage
+        /// </summary>
         public string StageAbbreviation
         {
             get
             {
-                switch(Stage)
+                switch (Stage)
                 {
                     case VersionStage.Alpha:
                         return "a";
@@ -71,15 +118,34 @@ namespace i5.Editor.Versioning
             }
         }
 
+        /// <summary>
+        /// Empty constructor for serialization
+        /// </summary>
         public VersionInfo()
         {
         }
 
-        public VersionInfo(int major, int minor, int patch, VersionStage stage, int build)
+        /// <summary>
+        /// Creates a new version info object with the given version number
+        /// </summary>
+        /// <param name="major">The major version number</param>
+        /// <param name="minor">The minor version number</param>
+        /// <param name="patch">The patch version number</param>
+        /// <param name="stage">The stage of the application</param>
+        /// <param name="build">The build number</param>
+        public VersionInfo(int major, int minor, int patch, VersionStage stage, int build = 0)
         {
             SetVersion(major, minor, patch, stage, build);
         }
 
+        /// <summary>
+        /// Updates the version and applies it to the project settings
+        /// </summary>
+        /// <param name="major">The major version number</param>
+        /// <param name="minor">The minor version number</param>
+        /// <param name="patch">The patch version number</param>
+        /// <param name="stage">The stage of the application</param>
+        /// <param name="build">The build number</param>
         public void SetVersion(int major, int minor, int patch, VersionStage stage, int build = 0)
         {
             majorVersion = major;
@@ -91,6 +157,10 @@ namespace i5.Editor.Versioning
             ApplyVersion();
         }
 
+        /// <summary>
+        /// Applies the set version to Unity's project settings
+        /// Currently supported: standalone, UWP, Android, iOS versions
+        /// </summary>
         private void ApplyVersion()
         {
 #if UNITY_EDITOR
@@ -164,7 +234,7 @@ namespace i5.Editor.Versioning
         /// </summary>
         /// <returns>The saved version configuration or the default version 0.1.0a0 if the configuration file does not exist</returns>
         public static VersionInfo TryLoad()
-        {   
+        {
             if (File.Exists(infoPath))
             {
                 string json = File.ReadAllText(infoPath);
