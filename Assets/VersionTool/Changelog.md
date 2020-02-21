@@ -2,10 +2,13 @@
 
 This file keeps track of the changes between releases of the Unity-VersionTool.
 
-## [Unreleased]
+## [0.1.2] - 2020-02-21
+Update with documentation and unit tests
 
 ### Added
 - Unit tests
+- Documentation
+- Short string representation of the version
 
 ## [0.1.1] - 2020-02-10
 Support for project builds
