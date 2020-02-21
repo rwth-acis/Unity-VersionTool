@@ -2,6 +2,20 @@
 
 This file keeps track of the changes between releases of the Unity-VersionTool.
 
+## [Unreleased]
+Refactor and optimization of code
+
+### Added
+- Check for deprecated save data
+
+### Changes
+- Code refactor
+- Internal optimizations to the editor window
+
+### Breaking Changes
+- save file now contains a packageVersion value
+- renamed "stage" to "stageNumber" in save file
+
 ## [0.1.2] - 2020-02-21
 Update with documentation and unit tests
 

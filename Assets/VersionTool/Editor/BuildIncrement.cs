@@ -21,17 +21,12 @@ namespace i5.Editor.Versioning
         [PostProcessBuild(1)]
         public static void OnPostprocessBuild(BuildTarget target, string pathToBuiltProject)
         {
-            if (VersionWindow.VersionInfo == null)
-            {
-                VersionWindow.VersionInfo = VersionInfo.TryLoad();
-            }
+            string previousVersion = VersionManager.DataInstance.VersionString;
 
-            string previousVersion = VersionWindow.VersionInfo.VersionString;
+            VersionManager.IncrementBuildVersion();
+            VersionManager.Save();
 
-            VersionWindow.VersionInfo.IncrementBuildVersion();
-            VersionWindow.VersionInfo.Save();
-
-            Debug.Log("Incremented Build Number: " + previousVersion + " -> " + VersionWindow.VersionInfo.VersionString);
+            Debug.Log("Incremented Build Number: " + previousVersion + " -> " + VersionManager.DataInstance.VersionString);
         }
 #endif
     }

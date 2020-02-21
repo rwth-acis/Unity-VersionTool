@@ -13,13 +13,6 @@ namespace i5.Editor.Versioning
         : EditorWindow
 #endif
     {
-        private static int major = 1;
-        private static int minor = 0;
-        private static int patch = 0;
-        private static VersionStage selectedStage = VersionStage.Alpha;
-
-        public static VersionInfo VersionInfo { get; set; }
-
 #if UNITY_EDITOR
         /// <summary>
         /// Called if the window is requested by the editor so that it can be shown
@@ -28,12 +21,6 @@ namespace i5.Editor.Versioning
         public static void ShowWindow()
         {
             EditorWindow.GetWindow(typeof(VersionWindow));
-            // load the VersionInfo object if it was not yet initialized
-            if (VersionInfo == null)
-            {
-                VersionInfo = VersionInfo.TryLoad();
-                SyncWindowWithStored();
-            }
         }
 
         /// <summary>
@@ -44,62 +31,41 @@ namespace i5.Editor.Versioning
         {
             // create the fields where the version numbers can be entered
             GUILayout.Label("Base Settings", EditorStyles.boldLabel);
-            major = EditorGUILayout.IntField("Major Version", major);
-            minor = EditorGUILayout.IntField("Minor Version", minor);
-            patch = EditorGUILayout.IntField("Patch Version", patch);
-            selectedStage = (VersionStage)EditorGUILayout.EnumPopup("Version status", selectedStage);
+            VersionManager.DataInstance.MajorVersion = EditorGUILayout.IntField("Major Version", VersionManager.DataInstance.MajorVersion);
+            VersionManager.DataInstance.MinorVersion = EditorGUILayout.IntField("Minor Version", VersionManager.DataInstance.MinorVersion);
+            VersionManager.DataInstance.PatchVersion = EditorGUILayout.IntField("Patch Version", VersionManager.DataInstance.PatchVersion);
+            VersionManager.DataInstance.Stage = (VersionStage)EditorGUILayout.EnumPopup("Version status", VersionManager.DataInstance.Stage);
             GUI.enabled = false;
-            EditorGUILayout.IntField(new GUIContent("Build Version", "The build version is automatically incremented each time you build the project."), VersionInfo.BuildVersion);
+            EditorGUILayout.IntField(new GUIContent("Build Version", "The build version is automatically incremented each time you build the project."), VersionManager.DataInstance.BuildVersion);
             GUI.enabled = true;
 
             // button for saving the version
             if (GUILayout.Button("Save Version"))
             {
-                VersionInfo.SetVersion(major, minor, patch, selectedStage);
-                Save();
+                VersionManager.Save();
             }
 
             // preview label which shows the version string
-            GUILayout.Label("Current version: " + VersionInfo.VersionString, EditorStyles.boldLabel);
+            GUILayout.Label("Current version: " + VersionManager.DataInstance.VersionString, EditorStyles.boldLabel);
 
             // quick buttons for incrementing version parts
             if (GUILayout.Button("Increment Major Version"))
             {
-                VersionInfo.IncrementMajorVersion();
-                Save();
+                VersionManager.IncrementMajorVersion();
+                VersionManager.Save();
             }
 
             if (GUILayout.Button("Increment Minor Version"))
             {
-                VersionInfo.IncrementMinorVersion();
-                Save();
+                VersionManager.IncrementMinorVersion();
+                VersionManager.Save();
             }
 
             if (GUILayout.Button("Increment Patch Version"))
             {
-                VersionInfo.IncrementPatchVersion();
-                Save();
+                VersionManager.IncrementPatchVersion();
+                VersionManager.Save();
             }
-        }
-
-        /// <summary>
-        /// Saves the version info
-        /// </summary>
-        private void Save()
-        {
-            VersionInfo.Save();
-            SyncWindowWithStored();
-        }
-
-        /// <summary>
-        /// Synchronizes the window's displayed data with the data stored in the VersionInfo object
-        /// </summary>
-        private static void SyncWindowWithStored()
-        {
-            major = VersionInfo.MajorVersion;
-            minor = VersionInfo.MinorVersion;
-            patch = VersionInfo.PatchVersion;
-            selectedStage = VersionInfo.Stage;
         }
 #endif
     }
