@@ -11,16 +11,16 @@ It can be included in new projects by referencing the git-repository on GitHub i
 1. Open your project's root folder in a file explorer.
 2. Navigate to the `Packages` folder and open the file `manifest.json`.
    It contains a list of package dependencies which are loaded into the project.
-3. To add a specific version of the tool to the dependencies, add the following line inside of the `"dependencies"` object and replace `[version]` with the version number.
-   To receive the latest version, replace `[version]` with `upm`.
-   ```"com.i5.versiontool": "https://github.com/rwth-acis/Unity-VersionTool.git#[version]",```
+3. To add a specific version of the tool to the dependencies, add the following line inside of the `"dependencies"` object and replace `[version]` with the release number.
+   To receive the latest version, replace `[release]` with `upm`.
+   ```"com.i5.versiontool": "https://github.com/rwth-acis/Unity-VersionTool.git#[release]",```
    After that, Unity will automatically download the package and it is immediately available.
 
 ### Alternative 2: Unity Package Manager UI with Git (Unity 2019.3 or later)
 The package can be downloaded from a git-repository in the package manager's UI.
 1. In Unity, go to `Window > Package Manger`.
 2. Click on the plus-button in the top left corner of the package manager and select "add".
-3. Enter `https://github.com/rwth-acis/Unity-VersionTool.git#[version]` into the text field where `[version]` is replaced with the version number or `upm` for the latest version.
+3. Enter `https://github.com/rwth-acis/Unity-VersionTool.git#[release]` into the text field where `[release]` is replaced with the release number or `upm` for the latest version.
    Confirm the download by clicking on the "add" button.
 
 ### Alternative 3: Import custom package (Unity 2017 or later)
@@ -33,7 +33,7 @@ Another option is to import the package as a .unitypackage.
 4. A dialog window opens where you can select which files should be imported.
    Select everything and click on "Import".
 
-*Important*: If you are updating from an earlier version, it is recommended to delete the existing "VersionTool" folder.
+*Important for alternative 3*: If you are updating from an earlier version, it is recommended to delete the existing "VersionTool" folder.
 After that, import the new package.
 
 ## Usage
